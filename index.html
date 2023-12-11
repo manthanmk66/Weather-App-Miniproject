@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+<body>
+<div class="wrapper">
+    <h1>Weather App</h1>
+
+
+    <!--main Content-->
+<div class="tab-container" >
+    <p class="tab" data-userweather>Your Weather</p>
+    <p class="tab" data-searchweather>Search Weather</p>   
+    
+</div>  
+
+
+
+
+
+
+
+<div class="weather-container">
+
+<!--Grant Location   -->
+<div class="grant-location-container">
+<img src="./assets/location.png" width="80" height="80" loading="lazy">
+<p>Grant Location Access</p>
+<button class="btn" data-grantaccess>Grant Access</button>
+
+</div>
+
+<!--Search Box-->
+
+<form class="form-container" data-searchform>
+
+    <input placeholder="Search for City.." data-searchinput>
+    <button class="btn">
+
+        <img src="./assets/search.png" width="20" height="20" loading="lazy">
+    </button>
+
+</form>
+
+
+
+<!--Loading Screen-->
+<div class="loading-container">
+    <img src="./assets/loading.gif" width="150" height="150">
+    <p>Loading</p>
+
+</div>
+
+
+<!--Show weather Info-->
+<div class="user-info-container"></div>
+
+<div class="name">
+
+    <p data-cityname></p>
+    <img data-countryicon>
+</div>
+
+<p data-weathericon></p>
+<p data-temp> </p>
+
+
+</div>
+
+
+</div>
+    
+</body>
+</html>
