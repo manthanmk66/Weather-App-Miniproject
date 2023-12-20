@@ -6,6 +6,7 @@ const grantAccessContainer = document.querySelector(".grant-location-container")
 const searchForm = document.querySelector("[data-searchForm]");
 const loadingScreen = document.querySelector(".loading-container");
 const userInfoContainer = document.querySelector(".user-info-container");
+const notFoundContainer = document.querySelector(".notFound");
 
 
 
@@ -139,31 +140,37 @@ grantAccessButton.addEventListener("click", getLocation);
 
 const searchInput = document.querySelector("[data-searchInput]");
 
-searchForm.addEventListener("submit", (e) => {
+searchForm.addEventListener("submit", (e)=>{
     e.preventDefault();
     let cityName = searchInput.value;
+    if(cityName === "") return;
 
-    if(cityName === "")
-        return;
-    else 
-        fetchSearchWeatherInfo(cityName);
+    fetchSearchWeatherInfo(cityName);
 })
 
-async function fetchSearchWeatherInfo(city) {
+async function fetchSearchWeatherInfo(city){
     loadingScreen.classList.add("active");
     userInfoContainer.classList.remove("active");
     grantAccessContainer.classList.remove("active");
 
-    try {
-        const response = await fetch(
-            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
-          );
-        const data = await response.json();
-        loadingScreen.classList.remove("active");
-        userInfoContainer.classList.add("active");
-        renderWeatherInfo(data);
+    try{
+         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
+         if(!response.ok){
+             loadingScreen.classList.remove("active");
+             userInfoContainer.classList.remove("active");
+             notFoundContainer.classList.add("active");
+         }
+         else{
+            const data = await response.json();
+            notFoundContainer.classList.remove("active");
+            loadingScreen.classList.remove("active");
+            userInfoContainer.classList.add("active");
+            renderWeatherInfo(data);
+         } 
     }
-    catch(err) {
-       
+    catch(err){
+        console.log("reached here");
+        userInfoContainer.classList.remove("active");
+        
     }
 }
